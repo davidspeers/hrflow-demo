@@ -45,8 +45,6 @@ export const searchSlice = createSlice({
           break;
         case SortFilter.CATEGORY:
           state.jobs = jobs.sort((a, b) => {
-            if (a.category === "N/A") return 1;
-            if (b.category === "N/A") return -1;
             return a.category === "N/A"
               ? 1
               : b.category === "N/A"
