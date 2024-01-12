@@ -11,7 +11,7 @@ function DemoToolbar() {
   return (
     <div className="flex items-center">
       <DemoToolbarSearchBar />
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-end">
         <DemoToolbarCategoryFilterDropdown />
         {categoryFilters.map((category) => (
           <DemoToolbarCategoryFilterBadge key={category} category={category} />
