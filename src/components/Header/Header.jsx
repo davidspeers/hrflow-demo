@@ -17,8 +17,8 @@ function Header() {
           </a>
         </div>
         <nav className="hidden items-center space-x-4 sm:flex">
-          <HeaderButton title="Demo" link="/demo"></HeaderButton>
-          <HeaderButton title="About" link="/about"></HeaderButton>
+          <HeaderButton title="Demo" path="/demo"></HeaderButton>
+          <HeaderButton title="About" path="/about"></HeaderButton>
         </nav>
         <div className="sm:hidden">
           <button
@@ -48,8 +48,8 @@ function Header() {
         flex flex-col space-y-2 border-t bg-white
         bg-opacity-20 p-4`}
       >
-        <HeaderButton title="Demo" link="/demo"></HeaderButton>
-        <HeaderButton title="About" link="/about"></HeaderButton>
+        <HeaderButton title="Demo" path="/demo"></HeaderButton>
+        <HeaderButton title="About" path="/about"></HeaderButton>
       </nav>
     </header>
   );
