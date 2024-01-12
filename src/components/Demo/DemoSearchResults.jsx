@@ -25,7 +25,7 @@ function DemoSearchResults() {
                 />
               </div>
             </th>
-            <th className="group bg-gray-100/75 px-3 py-4 text-left font-semibold text-gray-900">
+            <th className="group bg-gray-100/75 px-3 py-4 text-center font-semibold text-gray-900">
               <div className="inline-flex items-center gap-2">
                 <span>Category</span>
                 <DemoSearchResultsSortButton
@@ -33,7 +33,7 @@ function DemoSearchResults() {
                 />
               </div>
             </th>
-            <th className="group bg-gray-100/75 px-3 py-4 text-left font-semibold text-gray-900">
+            <th className="group bg-gray-100/75 px-3 py-4 text-end font-semibold text-gray-900">
               <div className="inline-flex items-center gap-2">
                 <span>Creation Date</span>
                 <DemoSearchResultsSortButton
