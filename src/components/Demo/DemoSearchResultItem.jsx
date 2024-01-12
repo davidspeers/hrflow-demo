@@ -1,5 +1,5 @@
 import { getDate, getTime } from "@helpers/formatDate";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import DemoCategoryBadge from "./DemoCategoryBadge";
 
 function DemoSearchResultItem(job) {
@@ -47,11 +47,11 @@ function DemoSearchResultItem(job) {
             <div className="flex grow flex-col">
               {summary && (
                 <p className="my-2 ml-5 mr-0 rounded border border-gray-300 p-2 text-sm">
-                  {summary.split("\n").map((line) => (
-                    <>
+                  {summary.split("\n").map((line, index) => (
+                    <Fragment key={index}>
                       {line}
                       <br />
-                    </>
+                    </Fragment>
                   ))}{" "}
                 </p>
               )}
