@@ -51,7 +51,7 @@ function DemoSearchResultItem(job) {
             ></span>
             <div className="flex grow flex-col">
               {summary && (
-                <p className="mx-4 my-2 rounded border border-gray-300 bg-white p-2 text-sm">
+                <p className="mx-4 my-2 rounded border border-gray-300 p-2 text-sm">
                   {summary.split("\n").map((line) => (
                     <>
                       {line}

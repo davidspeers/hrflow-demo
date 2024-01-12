@@ -70,7 +70,7 @@ function DemoSearchResults() {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            className="even:bg-gray-50"
+                            className="even:bg-slate-100"
                           >
                             <DemoSearchResultItem {...job} />
                           </div>
