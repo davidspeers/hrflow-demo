@@ -47,7 +47,7 @@ function DemoSearchResults() {
                 <DemoLoadingSearchResultItem key={i} />
               ))
             : jobs.map(({ id, name, tags, created_at }) => {
-                const categoryTag = tags.find((tag) => tag.key === "category");
+                const categoryTag = tags.find((tag) => tag.name === "category");
                 const category = categoryTag ? categoryTag.value : "N/A";
                 return (
                   <DemoSearchResultItem
