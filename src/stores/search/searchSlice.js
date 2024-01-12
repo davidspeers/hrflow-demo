@@ -1,6 +1,6 @@
 import client from "@api/client";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import Status from "./searchStatus";
+import Status from "@types/requestStatus";
 
 export const fetchJobResults = createAsyncThunk(
   "search/fetchJobResults",

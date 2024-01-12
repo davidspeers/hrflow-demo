@@ -1,9 +1,8 @@
 import { selectAllJobs } from "@stores/search/searchSlice";
+import SortButtonStatus from "@types/sortButtonStatus";
 import { useSelector } from "react-redux";
 import DemoSearchResultItem from "./DemoSearchResultItem";
-import DemoSearchResultsSortButton, {
-  Status,
-} from "./DemoSearchResultsSortButton/DemoSearchResultsSortButton";
+import DemoSearchResultsSortButton from "./DemoSearchResultsSortButton";
 
 function DemoSearchResults() {
   const jobs = useSelector(selectAllJobs);
@@ -16,19 +15,25 @@ function DemoSearchResults() {
             <th className="group bg-gray-100/75 px-3 py-4 text-left font-semibold text-gray-900">
               <div className="inline-flex items-center gap-2">
                 <span>Name</span>
-                <DemoSearchResultsSortButton sortStatus={Status.NOT_SORTED} />
+                <DemoSearchResultsSortButton
+                  sortStatus={SortButtonStatus.NOT_SORTED}
+                />
               </div>
             </th>
             <th className="group bg-gray-100/75 px-3 py-4 text-left font-semibold text-gray-900">
               <div className="inline-flex items-center gap-2">
                 <span>Category</span>
-                <DemoSearchResultsSortButton sortStatus={Status.NOT_SORTED} />
+                <DemoSearchResultsSortButton
+                  sortStatus={SortButtonStatus.NOT_SORTED}
+                />
               </div>
             </th>
             <th className="group bg-gray-100/75 px-3 py-4 text-left font-semibold text-gray-900">
               <div className="inline-flex items-center gap-2">
                 <span>Creation Date</span>
-                <DemoSearchResultsSortButton sortStatus={Status.NOT_SORTED} />
+                <DemoSearchResultsSortButton
+                  sortStatus={SortButtonStatus.NOT_SORTED}
+                />
               </div>
             </th>
           </tr>

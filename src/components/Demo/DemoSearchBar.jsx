@@ -1,5 +1,5 @@
 import { fetchJobResults, updateTerm } from "@stores/search/searchSlice";
-import Status from "@stores/search/searchStatus";
+import Status from "@types/requestStatus";
 import { useDispatch, useSelector } from "react-redux";
 
 function DemoSearchBar() {
