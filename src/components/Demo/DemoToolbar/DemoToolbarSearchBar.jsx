@@ -1,10 +1,10 @@
-import { updateTerm } from "@stores/search/searchSlice";
+import { selectSearchTerm, updateTerm } from "@stores/search/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function DemoToolbarSearchBar() {
   const dispatch = useDispatch();
 
-  const searchTerm = useSelector((state) => state.search.term);
+  const searchTerm = useSelector(selectSearchTerm);
 
   const handleChange = (event) => {
     dispatch(updateTerm(event.target.value));
