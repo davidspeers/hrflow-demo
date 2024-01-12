@@ -105,21 +105,10 @@ export const selectCategoryFilters = (state) => state.search.categoryFilters;
 
 const selectAllJobs = (state) => state.search.jobs;
 
-const selectAllJobsByTerm = (state) => {
+export const selectAllJobsByTerm = (state) => {
   const jobs = selectAllJobs(state);
   const term = state.search.term.toLowerCase();
   return jobs.filter((job) => {
     return job.name.toLowerCase().includes(term);
-  });
-};
-
-export const selectAllJobsByTermAndFiltered = (state) => {
-  const jobs = selectAllJobsByTerm(state);
-  const categoryFilters = selectCategoryFilters(state);
-  if (categoryFilters.length === 0) return jobs;
-  return jobs.filter((job) => {
-    return categoryFilters
-      .map((filter) => filter.toLowerCase())
-      .includes(job.category.toLowerCase());
   });
 };

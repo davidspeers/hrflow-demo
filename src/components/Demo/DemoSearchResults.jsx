@@ -1,5 +1,6 @@
 import {
-  selectAllJobsByTermAndFiltered,
+  selectAllJobsByTerm,
+  selectCategoryFilters,
   updateJobPosition,
   updateSortFilter,
 } from "@stores/search/searchSlice";
@@ -14,7 +15,8 @@ function DemoSearchResults() {
   const dispatch = useDispatch();
 
   const searchStatus = useSelector((state) => state.search.status);
-  const jobs = useSelector(selectAllJobsByTermAndFiltered);
+  const jobs = useSelector(selectAllJobsByTerm);
+  const categoryFilters = useSelector(selectCategoryFilters);
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
@@ -49,28 +51,36 @@ function DemoSearchResults() {
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 {jobs.map((job, index) => {
+                  const isJobShown =
+                    categoryFilters.length === 0
+                      ? true
+                      : categoryFilters
+                          .map((filter) => filter.toLowerCase())
+                          .includes(job.category.toLowerCase());
                   const { id, name, category, creationDate } = job;
                   return (
-                    <Draggable
-                      key={id}
-                      draggableId={id.toString()}
-                      index={index}
-                    >
-                      {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          className="flex items-center justify-between border-t border-gray-200 even:bg-gray-50"
-                        >
-                          <DemoSearchResultItem
-                            name={name}
-                            category={category}
-                            creationDate={creationDate}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
+                    isJobShown && (
+                      <Draggable
+                        key={id}
+                        draggableId={id.toString()}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            className="flex items-center justify-between border-t border-gray-200 even:bg-gray-50"
+                          >
+                            <DemoSearchResultItem
+                              name={name}
+                              category={category}
+                              creationDate={creationDate}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    )
                   );
                 })}
                 {provided.placeholder}
