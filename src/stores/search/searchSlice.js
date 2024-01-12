@@ -30,7 +30,7 @@ export const searchSlice = createSlice({
     },
     addToCategoryFilters: (state, { payload }) => {
       if (!state.categoryFilters.includes(payload)) {
-        state.categoryFilters.push(payload);
+        state.categoryFilters = [...state.categoryFilters, payload].sort();
       }
     },
     removeFromCategoryFilters: (state, action) => {
