@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import searchReducer from "@stores/search/searchSlice";
 
-export function setupMockStore() {
+export function setupStore(initialStateOverrides = {}) {
   const initialState = {
     search: {
       term: "",
@@ -19,6 +19,9 @@ export function setupMockStore() {
     reducer: {
       search: searchReducer,
     },
-    preloadedState: initialState,
+    preloadedState: {
+      ...initialState,
+      ...initialStateOverrides,
+    },
   });
 }
