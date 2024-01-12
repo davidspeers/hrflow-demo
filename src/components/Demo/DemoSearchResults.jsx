@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import DemoSearchResultItem from "./DemoSearchResultItem";
 import DemoSearchResultsSortButton, {
   Status,
-} from "./DemoSearchResultsSortButton";
+} from "./DemoSearchResultsSortButton/DemoSearchResultsSortButton";
 
 function DemoSearchResults() {
   const jobs = useSelector(selectAllJobs);

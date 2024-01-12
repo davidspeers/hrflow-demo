@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Status from "./status";
 
 function DemoSearchResultsSortButton({ sortStatus }) {
   return (
@@ -68,12 +69,6 @@ function DemoSearchResultsSortButton({ sortStatus }) {
 
 DemoSearchResultsSortButton.propTypes = {
   sortStatus: PropTypes.string.isRequired,
-};
-
-export const Status = {
-  NOT_SORTED: "not_sorted",
-  INCREASING: "increasing",
-  DECREASING: "decreasing",
 };
 
 export default DemoSearchResultsSortButton;
