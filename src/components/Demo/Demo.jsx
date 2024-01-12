@@ -23,20 +23,22 @@ function Demo() {
   }, [dispatch, searchStatus]);
 
   return (
-    <main
-      id="page-content"
-      className="flex max-w-full flex-auto flex-col overflow-hidden bg-gray-50 px-4 text-center md:px-8"
-    >
-      <DemoToolbar />
-
-
-      <DemoPagination />
-    </main>
+    <div className="flex w-full flex-grow justify-center bg-gray-50">
+      <main
+        id="page-content"
+        className="flex flex-col overflow-hidden px-4 text-center md:px-8 xl:w-full xl:max-w-7xl"
+      >
         {searchStatus === RequestStatus.FAILED ? (
-          <div className="font-semibold text-rose-400">{errorMessage}</div>
+          <div className="p-8 font-semibold text-rose-400">{errorMessage}</div>
         ) : (
-          <DemoSearchResults />
+          <>
+            <DemoToolbar />
+            <DemoSearchResults />
+            <DemoPagination />
+          </>
         )}
+      </main>
+    </div>
   );
 }
 
