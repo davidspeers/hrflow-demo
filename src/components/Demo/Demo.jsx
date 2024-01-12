@@ -2,6 +2,7 @@ import { fetchJobResults } from "@stores/search/searchSlice";
 import RequestStatus from "@types/RequestStatus";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import DemoPagination from "./DemoPagination";
 import DemoSearchResults from "./DemoSearchResults";
 import DemoToolbar from "./DemoToolbar/DemoToolbar";
 
@@ -12,7 +13,7 @@ function Demo() {
 
   useEffect(() => {
     if (searchStatus === RequestStatus.IDLE) {
-      dispatch(fetchJobResults());
+      dispatch(fetchJobResults({ page: 1 }));
     }
   }, [dispatch, searchStatus]);
 
@@ -32,6 +33,8 @@ function Demo() {
         ) : (
           <DemoSearchResults />
         )}
+
+        <DemoPagination />
       </main>
     </div>
   );

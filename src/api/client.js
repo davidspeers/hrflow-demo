@@ -17,14 +17,14 @@ const mapBackendJobsObjectToFrontendJobsObject = (job) => ({
 });
 
 const client = {
-  getJobsFromBoard: async function () {
+  getJobsFromBoard: async function (page) {
     const boardKey = import.meta.env.VITE_BOARD_KEY;
     try {
       const response = await fetch(
         `https://api.hrflow.ai/v1/jobs/searching?
           board_keys=["${boardKey}"]&
-          page=1&
-          limit=20&
+          page=${page}&
+          limit=10&
           order_by=desc&
           `,
         options,
@@ -32,8 +32,15 @@ const client = {
       if (response.status === 200) {
         const {
           data: { jobs },
+          meta,
         } = await response.json();
         return jobs.map((job) => mapBackendJobsObjectToFrontendJobsObject(job));
+        return {
+          jobs: jobs.map((job) =>
+            mapBackendJobsObjectToFrontendJobsObject(job),
+          ),
+          meta,
+        };
       } else {
         throw new Error(response.status);
       }

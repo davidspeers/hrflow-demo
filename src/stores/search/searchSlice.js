@@ -5,8 +5,8 @@ import SortFilter from "@types/sortFilter";
 
 export const fetchJobResults = createAsyncThunk(
   "search/fetchJobResults",
-  async () => {
-    return await client.getJobsFromBoard();
+  async ({ page }) => {
+    return await client.getJobsFromBoard(page);
   },
 );
 
@@ -17,6 +17,8 @@ export const searchSlice = createSlice({
     sortFilter: SortFilter.CREATION_DATE,
     categoryFilters: [],
     jobs: [],
+    page: 1,
+    maxPage: 0,
     status: Status.IDLE,
     error: null,
   },
@@ -69,6 +71,12 @@ export const searchSlice = createSlice({
       reorderedJobs.splice(action.payload.newPosition, 0, removed);
       state.jobs = reorderedJobs;
     },
+    incrementPage: (state) => {
+      state.page += 1;
+    },
+    decrementPage: (state) => {
+      state.page -= 1;
+    },
   },
   extraReducers(builder) {
     builder
@@ -77,7 +85,9 @@ export const searchSlice = createSlice({
       })
       .addCase(fetchJobResults.fulfilled, (state, action) => {
         state.status = Status.SUCCEEDED;
-        state.jobs = state.jobs = action.payload;
+        state.jobs = action.payload.jobs;
+        state.page = action.payload.meta.page;
+        state.maxPage = action.payload.meta.maxPage;
       })
       .addCase(fetchJobResults.rejected, (state, action) => {
         state.status = Status;
@@ -93,6 +103,8 @@ export const {
   removeFromCategoryFilters,
   resetCategoryFilters,
   updateJobPosition,
+  incrementPage,
+  decrementPage,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;
@@ -112,3 +124,7 @@ export const selectAllJobsByTerm = (state) => {
     return job.name.toLowerCase().includes(term);
   });
 };
+
+export const selectPage = (state) => state.search.page;
+
+export const selectMaxPage = (state) => state.search.maxPage;
