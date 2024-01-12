@@ -23,5 +23,5 @@ Have the newest version of node and npm installed
 
 ## Testing the application
 
-1. Follow the Quickstart
-2. run `npm run test`
+1. Follow the [Quickstart](#quickstart)
+2. `npm run test`
