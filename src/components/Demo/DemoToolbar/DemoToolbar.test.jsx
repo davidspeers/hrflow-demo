@@ -6,7 +6,7 @@ import { expect, test } from "vitest";
 import DemoToolbar from "./DemoToolbar";
 
 test("does not show Reset Filters button when no filters are applied", () => {
-  const store = setupStore({ search: { categoryFilters: [] } });
+  const store = setupStore({ categoryFilters: [] });
   const { queryByText } = render(
     <Provider store={store}>
       <DemoToolbar />
@@ -17,9 +17,7 @@ test("does not show Reset Filters button when no filters are applied", () => {
 });
 
 test("resets filters when Reset Filters button is pressed", () => {
-  const store = setupStore({
-    search: { categoryFilters: [JobCategory.AI] },
-  });
+  const store = setupStore({ categoryFilters: [JobCategory.AI] });
   const { getByText, queryByText } = render(
     <Provider store={store}>
       <DemoToolbar />

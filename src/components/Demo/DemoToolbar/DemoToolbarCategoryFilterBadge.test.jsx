@@ -9,7 +9,7 @@ let store, getByText, getByRole, renderResult;
 const category = JobCategory.AI;
 
 beforeEach(() => {
-  store = setupStore({ search: { categoryFilters: [category] } });
+  store = setupStore({ categoryFilters: [category] });
   renderResult = render(
     <Provider store={store}>
       <DemoToolbarCategoryFilterBadge category={category} />,

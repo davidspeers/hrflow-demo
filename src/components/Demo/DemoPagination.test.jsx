@@ -5,7 +5,7 @@ import { expect, test } from "vitest";
 import DemoPagination from "./DemoPagination";
 
 test("increments page when increment button is clicked and not disabled", () => {
-  const store = setupStore({ search: { page: 1, maxPage: 2 } });
+  const store = setupStore({ page: 1, maxPage: 2 });
   const { container } = render(
     <Provider store={store}>
       <DemoPagination />
@@ -19,7 +19,7 @@ test("increments page when increment button is clicked and not disabled", () => 
 });
 
 test("does not increment page when increment button is clicked and disabled", () => {
-  const store = setupStore({ search: { page: 2, maxPage: 2 } });
+  const store = setupStore({ page: 2, maxPage: 2 });
   const { container } = render(
     <Provider store={store}>
       <DemoPagination />
@@ -35,7 +35,7 @@ test("does not increment page when increment button is clicked and disabled", ()
 });
 
 test("decrements page when decrement button is clicked and not disabled", () => {
-  const store = setupStore({ search: { page: 2, maxPage: 2 } });
+  const store = setupStore({ page: 2, maxPage: 2 });
   const { container } = render(
     <Provider store={store}>
       <DemoPagination />
@@ -49,7 +49,7 @@ test("decrements page when decrement button is clicked and not disabled", () => 
 });
 
 test("does not decrement page when decrement button is clicked and disabled", () => {
-  const store = setupStore({ search: { page: 1, maxPage: 2 } });
+  const store = setupStore({ page: 1, maxPage: 2 });
   const { container } = render(
     <Provider store={store}>
       <DemoPagination />

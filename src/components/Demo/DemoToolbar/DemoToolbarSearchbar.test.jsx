@@ -8,7 +8,7 @@ test("renders the correct search term and dispatches updateTerm on change", () =
   const initialTerm = "Engineer";
   const updatedTerm = "Assistant";
 
-  const store = setupStore({ search: { term: initialTerm } });
+  const store = setupStore({ term: initialTerm });
   const { getByPlaceholderText } = render(
     <Provider store={store}>
       <DemoToolbarSearchBar />

@@ -1,13 +1,13 @@
 import { fireEvent, render } from "@testing-library/react";
-import { initialState, setupStore } from "@tests/setupStore";
+import { setupStore } from "@tests/setupStore";
 import SortFilter from "@types/SortFilter";
 import { Provider } from "react-redux";
 import { beforeEach, expect, test } from "vitest";
 import DemoToolbarSortDropdown from "./DemoToolbarSortDropdown";
 
 let store, getByText, renderResult, container;
-const defaultSortFilter = initialState.search.sortFilter;
-const newSortFilter = SortFilter.NAME;
+const initialSortFilter = SortFilter.CREATION_DATE;
+const updatedSortFilter = SortFilter.NAME;
 
 beforeEach(() => {
   store = setupStore();
@@ -20,19 +20,19 @@ beforeEach(() => {
 });
 
 test("updates sortFilter when an option is selected", () => {
-  fireEvent.click(getByText(`Ordered by ${defaultSortFilter}`));
-  fireEvent.click(getByText(newSortFilter));
+  fireEvent.click(getByText(`Ordered by ${initialSortFilter}`));
+  fireEvent.click(getByText(updatedSortFilter));
 
-  expect(store.getState().search.sortFilter).toBe(newSortFilter);
-  expect(getByText(`Ordered by ${newSortFilter}`).closest("button")).to.not.be
-    .null;
+  expect(store.getState().search.sortFilter).toBe(updatedSortFilter);
+  expect(getByText(`Ordered by ${updatedSortFilter}`).closest("button")).to.not
+    .be.null;
 });
 
 test("shows a checkmark beside the selected option", () => {
-  fireEvent.click(getByText(`Ordered by ${defaultSortFilter}`));
+  fireEvent.click(getByText(`Ordered by ${initialSortFilter}`));
 
   const checkIconElement = container.querySelector("svg.check");
-  const activeSortFilterElement = getByText(defaultSortFilter);
+  const activeSortFilterElement = getByText(initialSortFilter);
 
   expect(checkIconElement.nextSibling).toBe(activeSortFilterElement);
 });
@@ -56,7 +56,7 @@ test("shows a checkmark beside the selected option", () => {
   },
 ].forEach(({ sortFilter, expectedButtonText }) => {
   test(`displays "${expectedButtonText}" text when sortFilter is set to "${sortFilter}"`, () => {
-    store = setupStore({ search: { sortFilter } });
+    store = setupStore({ sortFilter });
     renderResult = render(
       <Provider store={store}>
         <DemoToolbarSortDropdown />
