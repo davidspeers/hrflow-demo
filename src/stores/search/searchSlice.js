@@ -92,7 +92,7 @@ const selectAllJobsByTermAndSorted = (state) => {
   const sortFilter = selectSortFilter(state);
   switch (sortFilter) {
     case SortFilter.CREATION_DATE:
-      return jobs.sort((a, b) => a.creationDate - b.creationDate);
+      return jobs.sort((a, b) => b.creationDate.localeCompare(a.creationDate));
     case SortFilter.NAME:
       return jobs.sort((a, b) => a.name.localeCompare(b.name));
     case SortFilter.CATEGORY:
