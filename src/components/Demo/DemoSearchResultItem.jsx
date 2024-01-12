@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 function DemoSearchResultItem({ name, category, creationDate }) {
   return (
     <tr className="even:bg-gray-50">
-      <td className="p-3">
+      <td className="p-3 text-left">
         <p className="font-medium">{name}</p>
       </td>
       <td className="p-3">
