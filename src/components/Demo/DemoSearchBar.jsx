@@ -1,4 +1,4 @@
-import { fetchResults, updateTerm } from "@stores/search/searchSlice";
+import { fetchJobResults, updateTerm } from "@stores/search/searchSlice";
 import Status from "@stores/search/searchStatus";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,7 +11,7 @@ function DemoSearchBar() {
   const handleChange = (event) => {
     dispatch(updateTerm(event.target.value));
     if (searchStatus === Status.IDLE) {
-      dispatch(fetchResults());
+      dispatch(fetchJobResults());
     }
   };
 

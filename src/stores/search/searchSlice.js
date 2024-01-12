@@ -2,10 +2,10 @@ import client from "@api/client";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Status from "./searchStatus";
 
-export const fetchResults = createAsyncThunk(
-  "search/fetchResults",
+export const fetchJobResults = createAsyncThunk(
+  "search/fetchJobResults",
   async () => {
-    return await client.getJobsFromBoard("engineer");
+    return await client.getJobsFromBoard();
   },
 );
 
@@ -13,7 +13,7 @@ export const searchSlice = createSlice({
   name: "search",
   initialState: {
     term: "",
-    results: [],
+    jobs: [],
     status: Status.IDLE,
     error: null,
   },
@@ -21,31 +21,28 @@ export const searchSlice = createSlice({
     updateTerm: (state, action) => {
       state.term = action.payload;
     },
-    addResults: (state, action) => {
-      state.results = action.payload;
-    },
-    resetResults: (state) => {
-      state.results = [];
+    addJobResults: (state, action) => {
+      state.jobs = action.payload;
     },
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchResults.pending, (state) => {
+      .addCase(fetchJobResults.pending, (state) => {
         state.status = Status.LOADING;
       })
-      .addCase(fetchResults.fulfilled, (state, action) => {
+      .addCase(fetchJobResults.fulfilled, (state, action) => {
         state.status = Status.SUCCEEDED;
-        state.results = state.results.concat(action.payload);
+        state.jobs = state.jobs.concat(action.payload);
       })
-      .addCase(fetchResults.rejected, (state, action) => {
+      .addCase(fetchJobResults.rejected, (state, action) => {
         state.status = Status;
         state.error = action.error.message;
       });
   },
 });
 
-export const { updateTerm, addResults, resetResults } = searchSlice.actions;
+export const { updateTerm, addJobResults, resetResults } = searchSlice.actions;
 
 export default searchSlice.reducer;
 
-export const selectAllResults = (state) => state.search.results;
+export const selectAllJobs = (state) => state.search.jobs;
