@@ -58,7 +58,9 @@ function DemoSearchResultItem(job) {
               <div className="flex flex-wrap">
                 <div className="block flex-1 p-3 sm:hidden">
                   <p className="font-medium">Category</p>
-                  <DemoCategoryBadge category={category} />
+                  <div className="mt-1">
+                    <DemoCategoryBadge category={category} />
+                  </div>
                 </div>
                 <div className="flex-1 p-3">
                   <p className="font-medium">Skills</p>
