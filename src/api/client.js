@@ -1,3 +1,5 @@
+import getCategoryFromJob from "@helpers/getCategoryFromJob";
+
 const options = {
   method: "GET",
   headers: {
@@ -6,6 +8,13 @@ const options = {
     "X-USER-EMAIL": import.meta.env.VITE_USER_EMAIL,
   },
 };
+
+const mapBackendJobsObjectToFrontendJobsObject = (job) => ({
+  id: job.id,
+  name: job.name,
+  creationDate: job.created_at,
+  category: getCategoryFromJob(job),
+});
 
 const client = {
   getJobsFromBoard: async function () {
@@ -24,7 +33,7 @@ const client = {
         const {
           data: { jobs },
         } = await response.json();
-        return jobs;
+        return jobs.map((job) => mapBackendJobsObjectToFrontendJobsObject(job));
       } else {
         throw new Error(response.status);
       }

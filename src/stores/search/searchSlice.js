@@ -1,5 +1,4 @@
 import client from "@api/client";
-import getCategoryFromJob from "@helpers/getCategoryFromJob";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Status from "@types/requestStatus";
 import SortFilter from "@types/sortFilter";
@@ -89,20 +88,18 @@ const selectAllJobsByTermAndSorted = (state) => {
   const sortFilter = selectSortFilter(state);
   switch (sortFilter) {
     case SortFilter.CREATION_DATE:
-      return jobs.sort((a, b) => a.createdAt - b.createdAt);
+      return jobs.sort((a, b) => a.creationDate - b.creationDate);
     case SortFilter.NAME:
       return jobs.sort((a, b) => a.name.localeCompare(b.name));
     case SortFilter.CATEGORY:
       return jobs.sort((a, b) => {
-        const categoryA = getCategoryFromJob(a);
-        const categoryB = getCategoryFromJob(b);
-        if (categoryA === "N/A") return 1;
-        if (categoryB === "N/A") return -1;
-        return categoryA === "N/A"
+        if (a.category === "N/A") return 1;
+        if (b.category === "N/A") return -1;
+        return a.category === "N/A"
           ? 1
-          : categoryB === "N/A"
+          : b.category === "N/A"
             ? -1
-            : categoryA.localeCompare(categoryB);
+            : a.category.localeCompare(b.category);
       });
     default:
       return jobs;
@@ -114,9 +111,10 @@ export const selectAllJobsByTermAndSortedAndFiltered = (state) => {
   const categoryFilters = selectCategoryFilters(state);
   if (categoryFilters.length === 0) return jobs;
   return jobs.filter((job) => {
-    const category = getCategoryFromJob(job).toLowerCase();
+    console.log(job);
+    console.log(categoryFilters);
     return categoryFilters
       .map((filter) => filter.toLowerCase())
-      .includes(category);
+      .includes(job.category.toLowerCase());
   });
 };

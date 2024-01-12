@@ -1,4 +1,3 @@
-import getCategoryFromJob from "@helpers/getCategoryFromJob";
 import { selectAllJobsByTermAndSortedAndFiltered } from "@stores/search/searchSlice";
 import RequestStatus from "@types/RequestStatus";
 import { useSelector } from "react-redux";
@@ -37,14 +36,13 @@ function DemoSearchResults() {
                 <DemoLoadingSearchResultItem key={i} />
               ))
             : jobs.map((job) => {
-                const { id, name, created_at } = job;
-                const category = getCategoryFromJob(job);
+                const { id, name, category, creationDate } = job;
                 return (
                   <DemoSearchResultItem
                     key={id}
                     name={name}
                     category={category}
-                    creationDate={created_at}
+                    creationDate={creationDate}
                   />
                 );
               })}
