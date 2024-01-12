@@ -22,7 +22,7 @@ function DemoSearchResultItem(job) {
     };
 
     return (
-      <div>
+      <div className="w-full">
         <div
           className="flex items-center justify-between border-t border-gray-200"
           onClick={handleExpand}

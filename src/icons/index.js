@@ -6,5 +6,6 @@ export { default as ChevronDownIcon } from "./ChevronDownIcon";
 export { default as ChevronLeftIcon } from "./ChevronLeftIcon";
 export { default as ChevronRightIcon } from "./ChevronRightIcon";
 export { default as CloseIcon } from "./CloseIcon";
+export { default as ReorderIcon } from "./ReorderIcon";
 export { default as SearchIcon } from "./SearchIcon";
 export { default as SearchPageIcon } from "./SearchPageIcon";

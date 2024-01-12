@@ -69,10 +69,15 @@ function DemoSearchResults() {
                           <div
                             ref={provided.innerRef}
                             {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            className="even:bg-slate-100"
+                            className="flex even:bg-slate-100"
                           >
                             <DemoSearchResultItem {...job} />
+                            <div
+                              className="relative mt-6 pb-0.5 text-gray-400"
+                              {...provided.dragHandleProps}
+                            >
+                              <ReorderIcon />
+                            </div>
                           </div>
                         )}
                       </Draggable>
