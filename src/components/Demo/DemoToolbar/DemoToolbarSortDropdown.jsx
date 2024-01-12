@@ -30,7 +30,7 @@ function DemoToolbarSortDropdown() {
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-90"
         >
-          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-lg shadow-xl focus:outline-none">
+          <Menu.Items className="absolute z-10 mt-2 w-48 origin-top-right rounded-lg shadow-xl focus:outline-none lg:right-0">
             <div className="divide-y divide-gray-100 rounded-lg bg-white ring-1 ring-black ring-opacity-5">
               {Object.values(SortFilter)
                 .filter((value) => value !== SortFilter.CUSTOM)
