@@ -13,10 +13,18 @@ function DemoToolbarCategoryFilterDropdown() {
 
   const categoryFilters = useSelector(selectCategoryFilters);
 
+  const isMenuButtonDisabled =
+    categoryFilters.length ===
+    Object.entries(JobCategory).filter(([key]) => !key.endsWith("_alt")).length;
+
   return (
     <div className="flex justify-end">
       <Menu as="div" className="relative inline-block">
-        <Menu.Button className="inline-flex items-center justify-center space-x-2 rounded-lg border border-blue-700 bg-blue-700 px-3 py-2 text-sm font-semibold leading-5 text-white hover:border-blue-600 hover:bg-blue-600 hover:text-white focus:ring focus:ring-blue-400 focus:ring-opacity-50 active:border-blue-700 active:bg-blue-700">
+        <Menu.Button
+          className={`inline-flex items-center justify-center space-x-2 rounded-lg border border-blue-700 bg-blue-700 px-3 py-2 text-sm font-semibold leading-5 text-white hover:border-blue-600 hover:bg-blue-600 hover:text-white focus:ring focus:ring-blue-400 focus:ring-opacity-50 active:border-blue-700 active:bg-blue-700
+          ${isMenuButtonDisabled && "cursor-not-allowed opacity-50"}`}
+          disabled={isMenuButtonDisabled}
+        >
           <span>Add Filter</span>
           <AddIcon />
         </Menu.Button>
