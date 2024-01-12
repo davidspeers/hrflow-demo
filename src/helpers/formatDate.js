@@ -1,16 +1,18 @@
+const _padLeft = (num) => String(num).padStart(2, "0");
+
 export function getDate(dateString) {
   const date = new Date(dateString);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const year = String(date.getFullYear());
+  const day = _padLeft(date.getDate());
+  const month = _padLeft(date.getMonth() + 1);
+  const year = date.getFullYear();
 
   return `${day}/${month}/${year}`;
 }
 
 export function getTime(dateString) {
   const date = new Date(dateString);
-  const hours = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const hours = _padLeft(date.getHours());
+  const minutes = _padLeft(date.getMinutes());
 
   return `${hours}:${minutes}`;
 }
