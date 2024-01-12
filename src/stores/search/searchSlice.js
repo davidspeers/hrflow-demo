@@ -2,7 +2,7 @@ import client from "@api/client";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import getCategoryFromJob from "@types/getCategoryFromJob";
 import Status from "@types/requestStatus";
-import SortCategory from "@types/sortCategory";
+import SortFilter from "@types/sortFilter";
 
 export const fetchJobResults = createAsyncThunk(
   "search/fetchJobResults",
@@ -15,7 +15,7 @@ export const searchSlice = createSlice({
   name: "search",
   initialState: {
     term: "",
-    sortCategory: SortCategory.CREATION_DATE,
+    sortFilter: SortFilter.CREATION_DATE,
     jobs: [],
     status: Status.IDLE,
     error: null,
@@ -24,8 +24,8 @@ export const searchSlice = createSlice({
     updateTerm: (state, action) => {
       state.term = action.payload;
     },
-    updateSortCategory: (state, action) => {
-      state.sortCategory = action.payload;
+    updateSortFilter: (state, action) => {
+      state.sortFilter = action.payload;
     },
   },
   extraReducers(builder) {
@@ -44,13 +44,13 @@ export const searchSlice = createSlice({
   },
 });
 
-export const { updateTerm, updateSortCategory } = searchSlice.actions;
+export const { updateTerm, updateSortFilter } = searchSlice.actions;
 
 export default searchSlice.reducer;
 
 export const selectSearchTerm = (state) => state.search.term;
 
-export const selectSortCategory = (state) => state.search.sortCategory;
+export const selectSortFilter = (state) => state.search.sortFilter;
 
 const selectAllJobs = (state) => state.search.jobs;
 
@@ -64,13 +64,13 @@ const selectAllJobsByTerm = (state) => {
 
 export const selectAllJobsByTermAndSorted = (state) => {
   const jobs = selectAllJobsByTerm(state);
-  const sortCategory = selectSortCategory(state);
-  switch (sortCategory) {
-    case SortCategory.CREATION_DATE:
+  const sortFilter = selectSortFilter(state);
+  switch (sortFilter) {
+    case SortFilter.CREATION_DATE:
       return jobs.sort((a, b) => a.createdAt - b.createdAt);
-    case SortCategory.NAME:
+    case SortFilter.NAME:
       return jobs.sort((a, b) => a.name.localeCompare(b.name));
-    case SortCategory.CATEGORY:
+    case SortFilter.CATEGORY:
       return jobs.sort((a, b) => {
         const categoryA = getCategoryFromJob(a);
         const categoryB = getCategoryFromJob(b);

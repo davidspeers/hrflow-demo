@@ -1,23 +1,20 @@
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@icons";
-import {
-  selectSortCategory,
-  updateSortCategory,
-} from "@stores/search/searchSlice";
-import SortCategory from "@types/sortCategory";
+import { selectSortFilter, updateSortFilter } from "@stores/search/searchSlice";
+import SortFilter from "@types/sortFilter";
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function DemoToolbarSortDropdown() {
   const dispatch = useDispatch();
 
-  const sortCategory = useSelector(selectSortCategory);
+  const sortFilter = useSelector(selectSortFilter);
 
   return (
     <div className="flex justify-end">
       <Menu as="div" className="relative inline-block">
         <Menu.Button className="inline-flex items-center justify-center space-x-2 rounded-lg border border-blue-700 bg-blue-700 px-3 py-2 text-sm font-semibold leading-5 text-white hover:border-blue-600 hover:bg-blue-600 hover:text-white focus:ring focus:ring-blue-400 focus:ring-opacity-50 active:border-blue-700 active:bg-blue-700">
-          <span>Sort by {sortCategory}</span>
+          <span>Sort by {sortFilter}</span>
           <ChevronDownIcon />
         </Menu.Button>
         <Transition
@@ -31,11 +28,11 @@ function DemoToolbarSortDropdown() {
         >
           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-lg shadow-xl focus:outline-none">
             <div className="divide-y divide-gray-100 rounded-lg bg-white ring-1 ring-black ring-opacity-5">
-              {Object.values(SortCategory).map((value, index) => (
+              {Object.values(SortFilter).map((value, index) => (
                 <Menu.Item key={index}>
                   {({ active }) => (
                     <div
-                      onClick={() => dispatch(updateSortCategory(value))}
+                      onClick={() => dispatch(updateSortFilter(value))}
                       className={`flex cursor-pointer items-center justify-between border border-transparent px-2.5 py-2 text-sm font-medium ${
                         active
                           ? "bg-blue-50 text-blue-800"
