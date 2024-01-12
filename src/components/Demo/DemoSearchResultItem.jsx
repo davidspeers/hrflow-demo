@@ -1,3 +1,4 @@
+import { getDate, getTime } from "@helpers/formatDate";
 import { getCategoryColor } from "@helpers/getCategoryColor";
 import PropTypes from "prop-types";
 
@@ -15,7 +16,10 @@ function DemoSearchResultItem({ name, category, creationDate }) {
           {category}
         </div>
       </td>
-      <td className="p-3 text-right">{creationDate}</td>
+      <td className="p-3 text-right">
+        <div>{getDate(creationDate)}</div>
+        <div className="text-gray-400">{getTime(creationDate)}</div>
+      </td>
     </tr>
   );
 }
