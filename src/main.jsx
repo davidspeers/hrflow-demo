@@ -1,4 +1,4 @@
-import App from "@components/App";
+import App from "@components/App/App";
 import store from "@stores/store";
 import React from "react";
 import ReactDOM from "react-dom/client";

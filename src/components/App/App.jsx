@@ -1,7 +1,7 @@
-import About from "@components/About";
-import Demo from "@components/Demo";
-import Header from "@components/Header";
-import PageNotFound from "@components/PageNotFound";
+import About from "@components/About/About";
+import Demo from "@components/Demo/Demo";
+import Header from "@components/Header/Header";
+import PageNotFound from "@components/PageNotFound/PageNotFound";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Redirect from "./Redirect.hook";
 
