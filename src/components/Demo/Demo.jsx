@@ -2,8 +2,8 @@ import { fetchJobResults } from "@stores/search/searchSlice";
 import RequestStatus from "@types/RequestStatus";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DemoSearchBar from "./DemoSearchBar";
 import DemoSearchResults from "./DemoSearchResults";
+import DemoTooltip from "./DemoTooltip/DemoTooltip";
 
 function Demo() {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ function Demo() {
         id="page-content"
         className="flex max-w-full flex-auto flex-col overflow-hidden px-8 text-center xl:max-w-7xl"
       >
-        <DemoSearchBar />
+        <DemoTooltip />
 
         {searchStatus === RequestStatus.FAILED ? (
           <div>Something went wrong...</div>
