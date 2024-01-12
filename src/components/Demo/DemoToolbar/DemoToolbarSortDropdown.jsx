@@ -1,5 +1,5 @@
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@icons";
+import { CheckIcon, ChevronDownIcon } from "@icons";
 import { selectSortFilter, updateSortFilter } from "@stores/search/searchSlice";
 import SortFilter from "@types/sortFilter";
 import { Fragment } from "react";
@@ -39,6 +39,7 @@ function DemoToolbarSortDropdown() {
                           : "text-gray-700 hover:bg-blue-50 hover:text-blue-800 active:border-blue-100"
                       }`}
                     >
+                      {value === sortFilter && <CheckIcon />}
                       <span className="grow">{value}</span>
                     </div>
                   )}
