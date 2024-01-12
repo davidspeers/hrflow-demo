@@ -1,10 +1,15 @@
 import { selectAllJobs } from "@stores/search/searchSlice";
 import SortButtonStatus from "@types/sortButtonStatus";
 import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import DemoLoadingSearchResultItem from "./DemoLoadingSearchResultItem";
 import DemoSearchResultItem from "./DemoSearchResultItem";
 import DemoSearchResultsSortButton from "./DemoSearchResultsSortButton";
 
 function DemoSearchResults() {
+  const dispatch = useDispatch();
+
+  const searchStatus = useSelector((state) => state.search.status);
   const jobs = useSelector(selectAllJobs);
 
   return (
@@ -39,18 +44,22 @@ function DemoSearchResults() {
           </tr>
         </thead>
         <tbody>
-          {jobs.map(({ id, name, tags, created_at }) => {
-            const categoryTag = tags.find((tag) => tag.key === "category");
-            const category = categoryTag ? categoryTag.value : "N/A";
-            return (
-              <DemoSearchResultItem
-                key={id}
-                name={name}
-                category={category}
-                creationDate={created_at}
-              />
-            );
-          })}
+          {searchStatus === RequestStatus.LOADING
+            ? Array.from({ length: 10 }).map((_, i) => (
+                <DemoLoadingSearchResultItem key={i} />
+              ))
+            : jobs.map(({ id, name, tags, created_at }) => {
+                const categoryTag = tags.find((tag) => tag.key === "category");
+                const category = categoryTag ? categoryTag.value : "N/A";
+                return (
+                  <DemoSearchResultItem
+                    key={id}
+                    name={name}
+                    category={category}
+                    creationDate={created_at}
+                  />
+                );
+              })}
         </tbody>
       </table>
     </div>
