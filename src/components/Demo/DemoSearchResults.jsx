@@ -61,6 +61,8 @@ function DemoSearchResults() {
             <DemoLoadingSearchResultItem key={i} />
           ))}
         </div>
+      ) : searchStatus === RequestStatus.SUCCEEDED && jobs.length === 0 ? (
+        <div className="p-8 font-semibold text-gray-800">No jobs found.</div>
       ) : (
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="jobs">
