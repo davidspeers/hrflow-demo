@@ -45,27 +45,6 @@ export const searchSlice = createSlice({
     },
     updateSortFilter: (state, action) => {
       state.sortFilter = action.payload;
-      const jobs = state.jobs;
-      const sortFilter = state.sortFilter;
-      switch (sortFilter) {
-        case SortFilter.CREATION_DATE:
-          state.jobs = jobs.sort((a, b) =>
-            b.creationDate.localeCompare(a.creationDate),
-          );
-          break;
-        case SortFilter.NAME:
-          state.jobs = jobs.sort((a, b) => a.name.localeCompare(b.name));
-          break;
-        case SortFilter.CATEGORY:
-          state.jobs = jobs.sort((a, b) => {
-            return a.category === "N/A"
-              ? 1
-              : b.category === "N/A"
-                ? -1
-                : a.category.localeCompare(b.category);
-          });
-          break;
-      }
     },
     addToCategoryFilters: (state, { payload }) => {
       if (!state.categoryFilters.includes(payload)) {
@@ -133,7 +112,26 @@ export const selectSortFilter = (state) => state.search.sortFilter;
 
 export const selectCategoryFilters = (state) => state.search.categoryFilters;
 
-export const selectAllJobs = (state) => state.search.jobs;
+export const selectAllJobs = (state) => {
+  const jobs = [...state.search.jobs];
+  const sortFilter = state.search.sortFilter;
+  switch (sortFilter) {
+    case SortFilter.CREATION_DATE:
+      return jobs.sort((a, b) => b.creationDate.localeCompare(a.creationDate));
+    case SortFilter.NAME:
+      return jobs.sort((a, b) => a.name.localeCompare(b.name));
+    case SortFilter.CATEGORY:
+      return jobs.sort((a, b) => {
+        return a.category === "N/A"
+          ? 1
+          : b.category === "N/A"
+            ? -1
+            : a.category.localeCompare(b.category);
+      });
+    default:
+      return jobs;
+  }
+};
 
 export const selectPage = (state) => state.search.page;
 
