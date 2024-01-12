@@ -16,6 +16,7 @@ export const searchSlice = createSlice({
   initialState: {
     term: "",
     sortFilter: SortFilter.CREATION_DATE,
+    categoryFilters: [],
     jobs: [],
     status: Status.IDLE,
     error: null,
@@ -26,6 +27,19 @@ export const searchSlice = createSlice({
     },
     updateSortFilter: (state, action) => {
       state.sortFilter = action.payload;
+    },
+    addToCategoryFilters: (state, { payload }) => {
+      if (!state.categoryFilters.includes(payload)) {
+        state.categoryFilters.push(payload);
+      }
+    },
+    removeFromCategoryFilters: (state, action) => {
+      state.categoryFilters = state.categoryFilters.filter(
+        (category) => category !== action.payload,
+      );
+    },
+    resetCategoryFilters: (state) => {
+      state.categoryFilters = [];
     },
   },
   extraReducers(builder) {
@@ -44,13 +58,21 @@ export const searchSlice = createSlice({
   },
 });
 
-export const { updateTerm, updateSortFilter } = searchSlice.actions;
+export const {
+  updateTerm,
+  updateSortFilter,
+  addToCategoryFilters,
+  removeFromCategoryFilters,
+  resetCategoryFilters,
+} = searchSlice.actions;
 
 export default searchSlice.reducer;
 
 export const selectSearchTerm = (state) => state.search.term;
 
 export const selectSortFilter = (state) => state.search.sortFilter;
+
+export const selectCategoryFilters = (state) => state.search.categoryFilters;
 
 const selectAllJobs = (state) => state.search.jobs;
 
