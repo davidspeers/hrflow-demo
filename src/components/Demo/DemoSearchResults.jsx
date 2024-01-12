@@ -1,3 +1,4 @@
+import { ReorderIcon } from "@icons";
 import {
   selectAllJobsByTerm,
   selectCategoryFilters,
@@ -36,7 +37,7 @@ function DemoSearchResults() {
     <div className="flex min-w-full flex-col overflow-x-auto rounded border border-gray-200 bg-white text-sm">
       <div className="flex justify-between bg-gray-200/75 px-3 py-4 font-semibold text-gray-900">
         <div className="flex-1 text-left">Job Title</div>
-        <div className="flex-1 text-center">Category</div>
+        <div className="hidden flex-1 text-center sm:block">Category</div>
         <div className="flex-1 text-right">Creation Date</div>
       </div>
       {searchStatus === RequestStatus.LOADING ? (

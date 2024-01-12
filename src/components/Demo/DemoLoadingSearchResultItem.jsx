@@ -4,7 +4,7 @@ function DemoLoadingSearchResultItem() {
       <div className="ml-3 flex-1">
         <div className="h-2 max-w-60 rounded bg-slate-200"></div>
       </div>
-      <div className="flex flex-1 items-center justify-center">
+      <div className="hidden flex-1 items-center justify-center sm:flex">
         <div className="h-2 max-w-36 flex-grow rounded bg-slate-200"></div>
       </div>
       <div className="flex flex-1 items-center justify-end">

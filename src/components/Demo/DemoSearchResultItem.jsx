@@ -1,6 +1,6 @@
 import { getDate, getTime } from "@helpers/formatDate";
-import { getCategoryColor } from "@helpers/getCategoryColor";
 import { useState } from "react";
+import DemoCategoryBadge from "./DemoCategoryBadge";
 
 function DemoSearchResultItem(job) {
   {
@@ -30,13 +30,8 @@ function DemoSearchResultItem(job) {
           <div className="flex-1 p-3 text-left">
             <p className="font-medium">{name}</p>
           </div>
-          <div className="flex-1 p-3 text-center">
-            <div
-              className={`inline-flex rounded-full border border-transparent px-2 py-1 text-xs font-semibold leading-4
-            ${getCategoryColor(category)}`}
-            >
-              {category}
-            </div>
+          <div className="hidden flex-1 p-3 text-center sm:block">
+            <DemoCategoryBadge category={category} />
           </div>
           <div className="flex-1 p-3 text-right">
             <div>{getDate(creationDate)}</div>
@@ -61,6 +56,10 @@ function DemoSearchResultItem(job) {
                 </p>
               )}
               <div className="flex flex-wrap">
+                <div className="block flex-1 p-3 sm:hidden">
+                  <p className="font-medium">Category</p>
+                  <DemoCategoryBadge category={category} />
+                </div>
                 <div className="flex-1 p-3">
                   <p className="font-medium">Skills</p>
                   <p>{skills.join(", ")}</p>
