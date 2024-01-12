@@ -12,21 +12,19 @@ function DemoToolbarSearchBar() {
   };
 
   return (
-    <div className="mx-auto w-1/2 max-w-md space-y-1 py-4">
-      <div className="relative">
-        <div className="pointer-events-none absolute inset-y-0 left-0 my-px ml-px flex w-12 items-center justify-center rounded-l-lg text-gray-500">
-          <SearchIcon />
-        </div>
-        <input
-          type="text"
-          id="search"
-          name="search"
-          placeholder="Search.."
-          className="block w-full rounded-lg border border-gray-200 py-3 pl-12 pr-5 leading-6 placeholder-gray-500 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-          value={searchTerm}
-          onChange={handleChange}
-        />
+    <div className="relative">
+      <div className="pointer-events-none absolute inset-y-0 left-0 my-px ml-px flex w-12 items-center justify-center rounded-l-lg text-gray-500">
+        <SearchIcon />
       </div>
+      <input
+        type="text"
+        id="search"
+        name="search"
+        placeholder="Search.."
+        className="block w-full rounded-lg border border-gray-200 pl-12 pr-5 leading-6 placeholder-gray-500 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+        value={searchTerm}
+        onChange={handleChange}
+      />
     </div>
   );
 }
