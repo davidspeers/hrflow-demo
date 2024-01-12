@@ -57,7 +57,7 @@ function DemoSearchResults() {
                       : categoryFilters
                           .map((filter) => filter.toLowerCase())
                           .includes(job.category.toLowerCase());
-                  const { id, name, category, creationDate } = job;
+                  const { id } = job;
                   return (
                     isJobShown && (
                       <Draggable
@@ -70,13 +70,9 @@ function DemoSearchResults() {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            className="flex items-center justify-between border-t border-gray-200 even:bg-gray-50"
+                            className="even:bg-gray-50"
                           >
-                            <DemoSearchResultItem
-                              name={name}
-                              category={category}
-                              creationDate={creationDate}
-                            />
+                            <DemoSearchResultItem {...job} />
                           </div>
                         )}
                       </Draggable>

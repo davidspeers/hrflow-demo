@@ -14,6 +14,12 @@ const mapBackendJobsObjectToFrontendJobsObject = (job) => ({
   name: job.name,
   creationDate: job.created_at,
   category: getCategoryFromJob(job),
+  location: job.location.text,
+  skills: job.skills.map((skill) => skill.name),
+  company: job.tags.find((tag) => tag.name === "company")?.value || "N/A",
+  type: job.tags.find((tag) => tag.name === "type")?.value || "N/A",
+  summary: job.summary,
+  startDate: job.ranges_date[0]?.value_min,
 });
 
 const client = {
