@@ -43,3 +43,11 @@ export const { updateTerm } = searchSlice.actions;
 export default searchSlice.reducer;
 
 export const selectAllJobs = (state) => state.search.jobs;
+
+export const selectAllJobsByTerm = (state) => {
+  const jobs = selectAllJobs(state);
+  const term = state.search.term.toLowerCase();
+  return jobs.filter((job) => {
+    return job.name.toLowerCase().includes(term);
+  });
+};
