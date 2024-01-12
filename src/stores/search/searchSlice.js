@@ -10,12 +10,16 @@ export const fetchJobResults = createAsyncThunk(
   },
 );
 
+const updateCategoryFiltersInLocalStorage = (categoryFilters) => {
+  localStorage.setItem("categoryFilters", JSON.stringify(categoryFilters));
+};
+
 export const searchSlice = createSlice({
   name: "search",
   initialState: {
     term: "",
     sortFilter: SortFilter.CREATION_DATE,
-    categoryFilters: [],
+    categoryFilters: JSON.parse(localStorage.getItem("categoryFilters")) || [],
     jobs: [],
     page: 1,
     maxPage: 0,
@@ -56,14 +60,17 @@ export const searchSlice = createSlice({
       if (!state.categoryFilters.includes(payload)) {
         state.categoryFilters = [...state.categoryFilters, payload].sort();
       }
+      updateCategoryFiltersInLocalStorage(state.categoryFilters);
     },
     removeFromCategoryFilters: (state, action) => {
       state.categoryFilters = state.categoryFilters.filter(
         (category) => category !== action.payload,
       );
+      updateCategoryFiltersInLocalStorage(state.categoryFilters);
     },
     resetCategoryFilters: (state) => {
       state.categoryFilters = [];
+      updateCategoryFiltersInLocalStorage(state.categoryFilters);
     },
     updateJobPosition: (state, action) => {
       const reorderedJobs = Array.from(state.jobs);
