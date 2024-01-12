@@ -1,7 +1,7 @@
 import { updateTerm } from "@stores/search/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-function DemoTooltipSearchBar() {
+function DemoToolbarSearchBar() {
   const dispatch = useDispatch();
 
   const searchTerm = useSelector((state) => state.search.term);
@@ -42,4 +42,4 @@ function DemoTooltipSearchBar() {
   );
 }
 
-export default DemoTooltipSearchBar;
+export default DemoToolbarSearchBar;
