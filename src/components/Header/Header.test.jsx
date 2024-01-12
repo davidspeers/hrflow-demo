@@ -1,7 +1,7 @@
-import Header from "@components/Header";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { expect, test } from "vitest";
+import Header from "./Header";
 
 test("toggles mobile navigation menu when button is clicked", () => {
   render(
