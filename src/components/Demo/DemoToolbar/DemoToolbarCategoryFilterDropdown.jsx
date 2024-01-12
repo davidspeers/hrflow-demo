@@ -1,4 +1,5 @@
 import { Menu, Transition } from "@headlessui/react";
+import { getCategoryColor } from "@helpers/getCategoryColor";
 import { AddIcon } from "@icons";
 import {
   addToCategoryFilters,
@@ -44,18 +45,13 @@ function DemoToolbarCategoryFilterDropdown() {
                 .filter(([, value]) => !categoryFilters.includes(value))
                 .map(([, value], index) => (
                   <Menu.Item key={index}>
-                    {({ active }) => (
-                      <div
-                        onClick={() => dispatch(addToCategoryFilters(value))}
-                        className={`flex cursor-pointer items-center justify-between border border-transparent px-2.5 py-2 text-sm font-medium ${
-                          active
-                            ? "bg-blue-50 text-blue-800"
-                            : "text-gray-700 hover:bg-blue-50 hover:text-blue-800 active:border-blue-100"
-                        }`}
-                      >
-                        <span className="grow">{value}</span>
-                      </div>
-                    )}
+                    <div
+                      onClick={() => dispatch(addToCategoryFilters(value))}
+                      className={`flex cursor-pointer items-center justify-between border border-transparent px-2.5 py-2 text-sm font-medium 
+                      ${getCategoryColor(value)} hover:opacity-80`}
+                    >
+                      <span className="grow">{value}</span>
+                    </div>
                   </Menu.Item>
                 ))}
             </div>
