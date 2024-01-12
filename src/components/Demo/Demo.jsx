@@ -1,4 +1,8 @@
-import { fetchJobResults } from "@stores/search/searchSlice";
+import {
+  fetchJobResults,
+  selectErrorMessage,
+  selectRequestStatus,
+} from "@stores/search/searchSlice";
 import RequestStatus from "@types/RequestStatus";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +13,8 @@ import DemoToolbar from "./DemoToolbar/DemoToolbar";
 function Demo() {
   const dispatch = useDispatch();
 
-  const searchStatus = useSelector((state) => state.search.status);
+  const searchStatus = useSelector(selectRequestStatus);
+  const errorMessage = useSelector(selectErrorMessage);
 
   useEffect(() => {
     if (searchStatus === RequestStatus.IDLE) {
@@ -24,14 +29,14 @@ function Demo() {
     >
       <DemoToolbar />
 
-      {searchStatus === RequestStatus.FAILED ? (
-        <div>Something went wrong...</div>
-      ) : (
-        <DemoSearchResults />
-      )}
 
       <DemoPagination />
     </main>
+        {searchStatus === RequestStatus.FAILED ? (
+          <div className="font-semibold text-rose-400">{errorMessage}</div>
+        ) : (
+          <DemoSearchResults />
+        )}
   );
 }
 

@@ -14,6 +14,19 @@ const updateCategoryFiltersInLocalStorage = (categoryFilters) => {
   localStorage.setItem("categoryFilters", JSON.stringify(categoryFilters));
 };
 
+const _getErrorMessage = (response) => {
+  console.log({ response2: response });
+  if (response === "400") {
+    return "Access Denied: Please check your credentials.";
+  } else if (response === "404") {
+    return "Failed to find any jobs. Please try again later.";
+  } else if (response === "500") {
+    return "Something went wrong on our side. Please try again later.";
+  } else {
+    return "Unexpected error: Please try again later.";
+  }
+};
+
 export const searchSlice = createSlice({
   name: "search",
   initialState: {
@@ -95,8 +108,8 @@ export const searchSlice = createSlice({
         state.maxPage = action.payload.meta.maxPage;
       })
       .addCase(fetchJobResults.rejected, (state, action) => {
-        state.status = Status;
-        state.error = action.error.message;
+        state.status = Status.FAILED;
+        state.error = _getErrorMessage(action.error.message);
       });
   },
 });
@@ -125,3 +138,7 @@ export const selectAllJobs = (state) => state.search.jobs;
 export const selectPage = (state) => state.search.page;
 
 export const selectMaxPage = (state) => state.search.maxPage;
+
+export const selectRequestStatus = (state) => state.search.status;
+
+export const selectErrorMessage = (state) => state.search.error;
