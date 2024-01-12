@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 function DemoCategoryBadge({ category }) {
   return (
     <div
-      className={`inline-flex rounded-full border border-transparent px-2 py-1 text-xs font-semibold leading-4
+      className={`inline-flex rounded border border-transparent px-2 py-1 text-xs font-semibold leading-4
             ${getCategoryColor(category)}`}
     >
       {category}
