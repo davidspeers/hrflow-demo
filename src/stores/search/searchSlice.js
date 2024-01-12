@@ -84,7 +84,7 @@ const selectAllJobsByTerm = (state) => {
   });
 };
 
-export const selectAllJobsByTermAndSorted = (state) => {
+const selectAllJobsByTermAndSorted = (state) => {
   const jobs = selectAllJobsByTerm(state);
   const sortFilter = selectSortFilter(state);
   switch (sortFilter) {
@@ -107,4 +107,16 @@ export const selectAllJobsByTermAndSorted = (state) => {
     default:
       return jobs;
   }
+};
+
+export const selectAllJobsByTermAndSortedAndFiltered = (state) => {
+  const jobs = selectAllJobsByTermAndSorted(state);
+  const categoryFilters = selectCategoryFilters(state);
+  if (categoryFilters.length === 0) return jobs;
+  return jobs.filter((job) => {
+    const category = getCategoryFromJob(job).toLowerCase();
+    return categoryFilters
+      .map((filter) => filter.toLowerCase())
+      .includes(category);
+  });
 };
