@@ -18,25 +18,20 @@ function Demo() {
   }, [dispatch, searchStatus]);
 
   return (
-    <div
-      id="page-container"
-      className="flex w-full min-w-[320px] flex-grow flex-col bg-gray-50"
+    <main
+      id="page-content"
+      className="flex max-w-full flex-auto flex-col overflow-hidden bg-gray-50 px-4 text-center md:px-8"
     >
-      <main
-        id="page-content"
-        className="flex max-w-full flex-auto flex-col overflow-hidden px-4 text-center md:px-8 xl:max-w-7xl"
-      >
-        <DemoToolbar />
+      <DemoToolbar />
 
-        {searchStatus === RequestStatus.FAILED ? (
-          <div>Something went wrong...</div>
-        ) : (
-          <DemoSearchResults />
-        )}
+      {searchStatus === RequestStatus.FAILED ? (
+        <div>Something went wrong...</div>
+      ) : (
+        <DemoSearchResults />
+      )}
 
-        <DemoPagination />
-      </main>
-    </div>
+      <DemoPagination />
+    </main>
   );
 }
 
