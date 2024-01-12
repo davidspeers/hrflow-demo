@@ -1,22 +1,16 @@
-import { useState } from "react";
+import { updateTerm } from "@stores/search/searchSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function DemoSearchBar() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const searchTerm = useSelector((state) => state.search.term);
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(`Searching for "${searchTerm}"`);
+    dispatch(updateTerm(event.target.value));
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="mx-auto w-1/2 max-w-md space-y-1 py-4"
-    >
+    <div className="mx-auto w-1/2 max-w-md space-y-1 py-4">
       <div className="relative">
         <div className="pointer-events-none absolute inset-y-0 left-0 my-px ml-px flex w-12 items-center justify-center rounded-l-lg text-gray-500">
           <svg
@@ -43,7 +37,7 @@ function DemoSearchBar() {
           onChange={handleChange}
         />
       </div>
-    </form>
+    </div>
   );
 }
 
