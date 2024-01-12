@@ -1,6 +1,7 @@
 import { selectAllJobsByTermAndSorted } from "@stores/search/searchSlice";
 import RequestStatus from "@types/RequestStatus";
 import { useSelector } from "react-redux";
+import getCategoryFromJob from "../../types/getCategoryFromJob";
 import DemoLoadingSearchResultItem from "./DemoLoadingSearchResultItem";
 import DemoSearchResultItem from "./DemoSearchResultItem";
 
@@ -35,9 +36,9 @@ function DemoSearchResults() {
             ? Array.from({ length: 10 }).map((_, i) => (
                 <DemoLoadingSearchResultItem key={i} />
               ))
-            : jobs.map(({ id, name, tags, created_at }) => {
-                const categoryTag = tags.find((tag) => tag.name === "category");
-                const category = categoryTag ? categoryTag.value : "N/A";
+            : jobs.map((job) => {
+                const { id, name, created_at } = job;
+                const category = getCategoryFromJob(job);
                 return (
                   <DemoSearchResultItem
                     key={id}

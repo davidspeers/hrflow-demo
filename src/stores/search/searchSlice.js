@@ -1,5 +1,6 @@
 import client from "@api/client";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import getCategoryFromJob from "@types/getCategoryFromJob";
 import Status from "@types/requestStatus";
 import SortCategory from "@types/sortCategory";
 
@@ -71,13 +72,15 @@ export const selectAllJobsByTermAndSorted = (state) => {
       return jobs.sort((a, b) => a.name.localeCompare(b.name));
     case SortCategory.CATEGORY:
       return jobs.sort((a, b) => {
-        const categoryTagA = a.tags.find((tag) => tag.name === "category");
-        const categoryA = categoryTagA ? categoryTagA.value : "N/A";
-        const categoryTagB = b.tags.find((tag) => tag.name === "category");
-        const categoryB = categoryTagB ? categoryTagB.value : "N/A";
+        const categoryA = getCategoryFromJob(a);
+        const categoryB = getCategoryFromJob(b);
         if (categoryA === "N/A") return 1;
         if (categoryB === "N/A") return -1;
-        return categoryA.localeCompare(categoryB);
+        return categoryA === "N/A"
+          ? 1
+          : categoryB === "N/A"
+            ? -1
+            : categoryA.localeCompare(categoryB);
       });
     default:
       return jobs;
