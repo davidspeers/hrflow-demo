@@ -13,11 +13,14 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
       "@assets": path.resolve(__dirname, "./src/assets"),
       "@components": path.resolve(__dirname, "./src/components"),
+      "@tests": path.resolve(__dirname, "./__tests__"),
     },
   },
   plugins: [react()],
   test: {
     globals: true,
     environment: "jsdom",
+    css: true,
+    setupFiles: ["./__tests__/setupTests.js"],
   },
 });
