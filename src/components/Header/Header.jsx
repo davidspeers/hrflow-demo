@@ -9,7 +9,7 @@ function Header() {
   return (
     <header
       id="page-header"
-      className="z-1 flex-col items-center bg-blue-400 shadow-lg"
+      className="z-10 flex-col items-center bg-blue-400 shadow-lg"
     >
       <div className="flex items-center justify-between space-x-4 p-4 sm:justify-normal">
         <div className="flex items-center space-x-4">
