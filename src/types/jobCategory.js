@@ -3,7 +3,6 @@ const JobCategory = {
   AI: "Artificial Intelligence",
   FINANCE: "Financial Services",
   HR: "Human Resources",
-  HR_alt: "Humain Resources",
   SWE: "Software Engineering",
 };
 

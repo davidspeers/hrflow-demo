@@ -15,8 +15,7 @@ function DemoToolbarCategoryFilterDropdown() {
   const categoryFilters = useSelector(selectCategoryFilters);
 
   const isMenuButtonDisabled =
-    categoryFilters.length ===
-    Object.entries(JobCategory).filter(([key]) => !key.endsWith("_alt")).length;
+    categoryFilters.length === Object.entries(JobCategory).length;
 
   return (
     <div className="flex justify-start">
@@ -41,7 +40,6 @@ function DemoToolbarCategoryFilterDropdown() {
           <Menu.Items className="absolute z-10 mt-2 w-48 origin-top-right rounded-lg shadow-xl focus:outline-none">
             <div className="divide-y divide-gray-100 rounded-lg bg-white ring-1 ring-black ring-opacity-5">
               {Object.entries(JobCategory)
-                .filter(([key]) => !key.endsWith("_alt"))
                 .filter(([, value]) => !categoryFilters.includes(value))
                 .map(([, value], index) => (
                   <Menu.Item key={index}>
