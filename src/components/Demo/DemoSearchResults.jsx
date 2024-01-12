@@ -1,7 +1,7 @@
+import getCategoryFromJob from "@helpers/getCategoryFromJob";
 import { selectAllJobsByTermAndSorted } from "@stores/search/searchSlice";
 import RequestStatus from "@types/RequestStatus";
 import { useSelector } from "react-redux";
-import getCategoryFromJob from "../../types/getCategoryFromJob";
 import DemoLoadingSearchResultItem from "./DemoLoadingSearchResultItem";
 import DemoSearchResultItem from "./DemoSearchResultItem";
 

@@ -1,6 +1,6 @@
 import client from "@api/client";
+import getCategoryFromJob from "@helpers/getCategoryFromJob";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import getCategoryFromJob from "@types/getCategoryFromJob";
 import Status from "@types/requestStatus";
 import SortFilter from "@types/sortFilter";
 
