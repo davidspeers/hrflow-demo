@@ -19,7 +19,7 @@ function DemoToolbarCategoryFilterDropdown() {
     Object.entries(JobCategory).filter(([key]) => !key.endsWith("_alt")).length;
 
   return (
-    <div className="flex justify-end">
+    <div className="flex justify-start">
       <Menu as="div" className="relative inline-block">
         <Menu.Button
           className={`inline-flex items-center justify-center space-x-2 rounded-lg border border-blue-700 bg-blue-700 px-3 py-2 text-sm font-semibold leading-5 text-white hover:border-blue-600 hover:bg-blue-600 hover:text-white focus:ring focus:ring-blue-400 focus:ring-opacity-50 active:border-blue-700 active:bg-blue-700
@@ -38,7 +38,7 @@ function DemoToolbarCategoryFilterDropdown() {
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-90"
         >
-          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-lg shadow-xl focus:outline-none">
+          <Menu.Items className="absolute z-10 mt-2 w-48 origin-top-right rounded-lg shadow-xl focus:outline-none">
             <div className="divide-y divide-gray-100 rounded-lg bg-white ring-1 ring-black ring-opacity-5">
               {Object.entries(JobCategory)
                 .filter(([key]) => !key.endsWith("_alt"))

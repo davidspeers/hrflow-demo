@@ -15,10 +15,10 @@ function DemoToolbar() {
   const isAnyCategoryFilterApplied = categoryFilters.length > 0;
 
   return (
-    <div className="mb-2 mt-2 flex flex-wrap items-start justify-between">
+    <div className="mb-2 mt-2 flex flex-col flex-wrap items-start justify-between md:flex-row">
       <DemoToolbarSearchBar />
-      <div className="flex flex-col items-center">
-        <div className="flex items-end">
+      <div className="m-2 flex flex-grow flex-col items-start">
+        <div className="flex w-full min-w-48 items-end justify-start md:justify-center">
           <DemoToolbarCategoryFilterDropdown />
           {isAnyCategoryFilterApplied && (
             <button
@@ -30,7 +30,7 @@ function DemoToolbar() {
           )}
         </div>
         {isAnyCategoryFilterApplied && (
-          <div className="mt-2 flex max-w-96 flex-wrap justify-end">
+          <div className="mt-2 flex max-w-96 flex-wrap justify-start md:justify-center">
             {categoryFilters.map((category) => (
               <DemoToolbarCategoryFilterBadge
                 key={category}
