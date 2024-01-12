@@ -7,7 +7,7 @@ import Redirect from "./Redirect.hook";
 
 function App() {
   return (
-    <div className="mx-auto flex min-h-dvh w-full min-w-[320px] flex-col bg-gray-100">
+    <div className="mx-auto flex min-h-dvh w-full min-w-[320px] flex-col bg-gray-50">
       <BrowserRouter>
         <Header />
         <Routes>
