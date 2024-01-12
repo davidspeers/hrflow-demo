@@ -19,9 +19,11 @@ function DemoSearchResults() {
         <div className="flex-1 text-right">Creation Date</div>
       </div>
       {searchStatus === RequestStatus.LOADING ? (
-        Array.from({ length: 10 }).map((_, i) => (
-          <DemoLoadingSearchResultItem key={i} />
-        ))
+        <div>
+          {Array.from({ length: 10 }).map((_, i) => (
+            <DemoLoadingSearchResultItem key={i} />
+          ))}
+        </div>
       ) : (
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="jobs">

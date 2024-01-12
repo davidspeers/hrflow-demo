@@ -1,18 +1,16 @@
 function DemoLoadingSearchResultItem() {
   return (
-    <tr className="h-12 animate-pulse even:bg-gray-50">
-      <td className="p-3">
-        <div className="h-2 rounded bg-slate-200"></div>
-      </td>
-      <td className="flex h-12 items-center justify-center p-3">
-        <div className="h-2 max-w-12 flex-grow rounded bg-slate-200"></div>
-      </td>
-      <td className="p-3">
-        <div className="flex items-center justify-end ">
-          <div className="h-2 max-w-24 flex-grow rounded bg-slate-200"></div>
-        </div>
-      </td>
-    </tr>
+    <div className="flex h-16 animate-pulse items-center justify-between border-t border-gray-200 even:bg-gray-50">
+      <div className="ml-3 flex-1">
+        <div className="h-2 max-w-60 rounded bg-slate-200"></div>
+      </div>
+      <div className="flex flex-1 items-center justify-center">
+        <div className="h-2 max-w-36 flex-grow rounded bg-slate-200"></div>
+      </div>
+      <div className="flex flex-1 items-center justify-end">
+        <div className="mr-3 h-2 max-w-16 flex-grow rounded bg-slate-200"></div>
+      </div>
+    </div>
   );
 }
 
