@@ -13,14 +13,17 @@ export default function PaginationSimple() {
   const page = useSelector(selectPage);
   const maxPage = useSelector(selectMaxPage);
 
+  const isIncrementDisabled = page === maxPage;
+  const isDecrementDisabled = page === 1;
+
   const incrementPage = () => {
-    if (page === maxPage) return;
+    if (isIncrementDisabled) return;
     dispatch(fetchJobResults({ page: page + 1 }));
     dispatch(incrementPageAction());
   };
 
   const decrementPage = () => {
-    if (page === 1) return;
+    if (isDecrementDisabled) return;
     dispatch(fetchJobResults({ page: page - 1 }));
     dispatch(decrementPageAction());
   };
@@ -30,7 +33,10 @@ export default function PaginationSimple() {
       <div className="flex justify-center text-center">
         <button
           onClick={() => decrementPage()}
-          className="hover:z-1 focus:z-1 active:z-1 inline-flex items-center justify-center space-x-2 rounded-lg border border-gray-200 bg-white px-4 py-2 font-semibold leading-6 text-gray-800 hover:border-gray-300 hover:text-gray-900 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none"
+          disabled={isDecrementDisabled}
+          className={`hover:z-1 focus:z-1 active:z-1 inline-flex items-center justify-center space-x-2 rounded-lg border border-gray-200 bg-white px-4 py-2 font-semibold leading-6 text-gray-800 hover:border-gray-300 hover:text-gray-900 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none
+            ${isDecrementDisabled && "cursor-not-allowed opacity-50"}
+          `}
         >
           <ChevronLeftIcon />
         </button>
@@ -42,7 +48,10 @@ export default function PaginationSimple() {
         </div>
         <button
           onClick={() => incrementPage()}
-          className="hover:z-1 focus:z-1 active:z-1 inline-flex items-center justify-center space-x-2 rounded-lg border border-gray-200 bg-white px-4 py-2 font-semibold leading-6 text-gray-800 hover:border-gray-300 hover:text-gray-900 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none"
+          disabled={isIncrementDisabled}
+          className={`hover:z-1 focus:z-1 active:z-1 inline-flex items-center justify-center space-x-2 rounded-lg border border-gray-200 bg-white px-4 py-2 font-semibold leading-6 text-gray-800 hover:border-gray-300 hover:text-gray-900 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25 active:border-gray-200 active:shadow-none
+            ${isIncrementDisabled && "cursor-not-allowed opacity-50"}
+          `}
         >
           <ChevronRightIcon />
         </button>
