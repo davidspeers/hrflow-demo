@@ -1,7 +1,8 @@
 import { ReorderIcon } from "@icons";
 import {
-  selectAllJobsByTerm,
+  selectAllJobs,
   selectCategoryFilters,
+  selectSearchTerm,
   updateJobPosition,
   updateSortFilter,
 } from "@stores/search/searchSlice";
@@ -16,7 +17,8 @@ function DemoSearchResults() {
   const dispatch = useDispatch();
 
   const searchStatus = useSelector((state) => state.search.status);
-  const jobs = useSelector(selectAllJobsByTerm);
+  const jobs = useSelector(selectAllJobs);
+  const searchTerm = useSelector(selectSearchTerm);
   const categoryFilters = useSelector(selectCategoryFilters);
 
   const onDragEnd = (result) => {
@@ -31,6 +33,19 @@ function DemoSearchResults() {
         newPosition: destination.index,
       }),
     );
+  };
+
+  const getIsJobShown = (job) => {
+    const isJobFiltered =
+      categoryFilters.length === 0
+        ? true
+        : categoryFilters
+            .map((filter) => filter.toLowerCase())
+            .includes(job.category?.toLowerCase());
+    const isJobSearched = job.name
+      ?.toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    return isJobFiltered && isJobSearched;
   };
 
   return (
@@ -52,12 +67,7 @@ function DemoSearchResults() {
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 {jobs.map((job, index) => {
-                  const isJobShown =
-                    categoryFilters.length === 0
-                      ? true
-                      : categoryFilters
-                          .map((filter) => filter.toLowerCase())
-                          .includes(job.category.toLowerCase());
+                  const isJobShown = getIsJobShown(job);
                   const { id } = job;
                   return (
                     isJobShown && (
