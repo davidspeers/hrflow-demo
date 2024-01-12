@@ -1,3 +1,4 @@
+import { getCategoryColor } from "@helpers/getCategoryColor";
 import PropTypes from "prop-types";
 
 function DemoSearchResultItem({ name, category, creationDate }) {
@@ -7,7 +8,10 @@ function DemoSearchResultItem({ name, category, creationDate }) {
         <p className="font-medium">{name}</p>
       </td>
       <td className="p-3">
-        <div className="inline-flex rounded-full border border-transparent bg-emerald-100 px-2 py-1 text-xs font-semibold leading-4 text-emerald-900">
+        <div
+          className={`inline-flex rounded-full border border-transparent px-2 py-1 text-xs font-semibold leading-4
+          ${getCategoryColor(category)}`}
+        >
           {category}
         </div>
       </td>
