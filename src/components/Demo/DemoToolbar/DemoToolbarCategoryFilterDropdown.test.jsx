@@ -1,16 +1,16 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { setupMockStore } from "@tests/setupMockStore";
+import { setupStore } from "@tests/setupStore";
 import JobCategory from "@types/JobCategory";
 import { Provider } from "react-redux";
 import { beforeEach, expect, test } from "vitest";
 import DemoToolbarCategoryFilterDropdown from "./DemoToolbarCategoryFilterDropdown";
 
-let mockStore, getByText, renderResult;
+let store, getByText, renderResult;
 
 beforeEach(() => {
-  mockStore = setupMockStore();
+  store = setupStore();
   renderResult = render(
-    <Provider store={mockStore}>
+    <Provider store={store}>
       <DemoToolbarCategoryFilterDropdown />
     </Provider>,
   );
@@ -27,7 +27,7 @@ test("adds a filter when a menu item is clicked", () => {
   fireEvent.click(getByText("Add Filter"));
   fireEvent.click(getByText(JobCategory.AI));
 
-  expect(mockStore.getState().search.categoryFilters).toContain(JobCategory.AI);
+  expect(store.getState().search.categoryFilters).toContain(JobCategory.AI);
 });
 
 test('disables the "Add Filter" button when all categories are selected', () => {
@@ -51,5 +51,5 @@ test("contains the correct number of items in the dropdown menu", () => {
   );
   expect(renderResult.queryByText(JobCategory.AI)).to.be.null;
   expect(renderResult.queryByText(JobCategory.HR)).to.be.null;
-  expect(renderResult.queryByText(JobCategory.SWE)).not.to.be.null;
+  expect(renderResult.queryByText(JobCategory.SWE)).to.not.be.null;
 });
