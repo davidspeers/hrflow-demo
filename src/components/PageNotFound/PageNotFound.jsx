@@ -1,9 +1,9 @@
 function PageNotFound() {
   return (
     <>
-      <div className="mx-auto flex w-full min-w-[320px] flex-grow flex-col bg-gray-100">
+      <div className="mx-auto flex w-full min-w-[320px] flex-grow flex-col">
         <main id="page-content" className="flex flex-auto">
-          <div className="relative flex flex-grow items-center overflow-hidden bg-white ">
+          <div className="relative flex flex-grow items-center overflow-hidden bg-gray-50">
             <div className="container relative mx-auto space-y-8 px-8 py-16 text-center lg:py-16 xl:max-w-7xl">
               <div>
                 <div className="mb-5 text-rose-300 ">

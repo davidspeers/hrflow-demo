@@ -2,7 +2,7 @@ import profilePicture from "@assets/david-speers-profile-photo.png";
 
 function About() {
   return (
-    <div className="flex flex-grow bg-white">
+    <div className="flex flex-grow bg-gray-50">
       <div className="container mx-auto flex flex-col justify-center space-y-8 px-4 py-8 text-center lg:px-8 lg:py-32 xl:max-w-7xl">
         <img
           src={profilePicture}
