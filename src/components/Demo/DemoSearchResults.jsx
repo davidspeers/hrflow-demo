@@ -40,9 +40,7 @@ function DemoSearchResults() {
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className={`flex items-center justify-between border-t border-gray-200 
-                            ${index % 2 === 0 ? "bg-gray-50" : ""}
-                          `}
+                          className="flex items-center justify-between border-t border-gray-200 even:bg-gray-50"
                         >
                           <DemoSearchResultItem
                             name={name}
