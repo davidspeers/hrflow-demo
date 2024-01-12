@@ -8,23 +8,23 @@ const options = {
 };
 
 const client = {
-  getJobsFromBoard: async function (name) {
+  getJobsFromBoard: async function () {
     const boardKey = import.meta.env.VITE_BOARD_KEY;
     try {
       const response = await fetch(
-        `https://api.hrflow.ai/v1/storing/jobs?
+        `https://api.hrflow.ai/v1/jobs/searching?
           board_keys=["${boardKey}"]&
-          name=${name}&
-          return_job=true&
-          page=1&limit=10&
+          page=1&
+          limit=20&
           order_by=desc&
-          sort_by=created_at
           `,
         options,
       );
       if (response.status === 200) {
-        const { data } = await response.json();
-        return data;
+        const {
+          data: { jobs },
+        } = await response.json();
+        return jobs;
       } else {
         throw new Error(response.status);
       }
