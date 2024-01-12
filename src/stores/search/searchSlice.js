@@ -21,9 +21,6 @@ export const searchSlice = createSlice({
     updateTerm: (state, action) => {
       state.term = action.payload;
     },
-    addJobResults: (state, action) => {
-      state.jobs = action.payload;
-    },
   },
   extraReducers(builder) {
     builder
@@ -32,7 +29,7 @@ export const searchSlice = createSlice({
       })
       .addCase(fetchJobResults.fulfilled, (state, action) => {
         state.status = Status.SUCCEEDED;
-        state.jobs = state.jobs.concat(action.payload);
+        state.jobs = state.jobs = action.payload;
       })
       .addCase(fetchJobResults.rejected, (state, action) => {
         state.status = Status;
@@ -41,7 +38,7 @@ export const searchSlice = createSlice({
   },
 });
 
-export const { updateTerm, addJobResults, resetResults } = searchSlice.actions;
+export const { updateTerm } = searchSlice.actions;
 
 export default searchSlice.reducer;
 
