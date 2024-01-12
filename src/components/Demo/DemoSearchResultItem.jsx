@@ -24,7 +24,7 @@ function DemoSearchResultItem(job) {
     return (
       <div className="w-full">
         <div
-          className="flex items-center justify-between border-t border-gray-200"
+          className="flex cursor-pointer items-center justify-between border-t border-gray-200"
           onClick={handleExpand}
         >
           <div className="flex-1 p-3 text-left">
@@ -46,7 +46,7 @@ function DemoSearchResultItem(job) {
             ></span>
             <div className="flex grow flex-col">
               {summary && (
-                <p className="mx-4 my-2 rounded border border-gray-300 p-2 text-sm">
+                <p className="my-2 ml-5 mr-0 rounded border border-gray-300 p-2 text-sm">
                   {summary.split("\n").map((line) => (
                     <>
                       {line}

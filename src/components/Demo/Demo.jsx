@@ -24,7 +24,7 @@ function Demo() {
     >
       <main
         id="page-content"
-        className="flex max-w-full flex-auto flex-col overflow-hidden px-8 text-center xl:max-w-7xl"
+        className="flex max-w-full flex-auto flex-col overflow-hidden px-4 text-center md:px-8 xl:max-w-7xl"
       >
         <DemoToolbar />
 
