@@ -9,7 +9,7 @@ export function getCategoryColor(category) {
     [JobCategory.SWE]: "bg-yellow-300 text-yellow-800",
   };
   const matchingColor = Object.keys(categoryColors).find(
-    (key) => key.toLowerCase() === category.toLowerCase(),
+    (key) => key?.toLowerCase() === category?.toLowerCase(),
   );
 
   return categoryColors[matchingColor] || "bg-gray-100 text-gray-600";
