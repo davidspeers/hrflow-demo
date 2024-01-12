@@ -1,8 +1,10 @@
 import {
   selectAllJobsByTermAndSortedAndFiltered,
   updateJobs,
+  updateSortFilter,
 } from "@stores/search/searchSlice";
 import RequestStatus from "@types/RequestStatus";
+import SortFilter from "@types/sortFilter";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import DemoLoadingSearchResultItem from "./DemoLoadingSearchResultItem";
@@ -23,6 +25,7 @@ function DemoSearchResults() {
     const [removed] = reorderedJobs.splice(source.index, 1);
     reorderedJobs.splice(destination.index, 0, removed);
 
+    dispatch(updateSortFilter(SortFilter.CUSTOM));
     dispatch(updateJobs(reorderedJobs));
   };
 
