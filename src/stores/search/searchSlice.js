@@ -40,6 +40,9 @@ export const searchSlice = createSlice({
     resetCategoryFilters: (state) => {
       state.categoryFilters = [];
     },
+    updateJobs: (state, action) => {
+      state.jobs = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -63,6 +66,7 @@ export const {
   addToCategoryFilters,
   removeFromCategoryFilters,
   resetCategoryFilters,
+  updateJobs,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;

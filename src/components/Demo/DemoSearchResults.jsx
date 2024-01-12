@@ -1,15 +1,30 @@
-import { selectAllJobsByTermAndSortedAndFiltered } from "@stores/search/searchSlice";
+import {
+  selectAllJobsByTermAndSortedAndFiltered,
+  updateJobs,
+} from "@stores/search/searchSlice";
 import RequestStatus from "@types/RequestStatus";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DemoLoadingSearchResultItem from "./DemoLoadingSearchResultItem";
 import DemoSearchResultItem from "./DemoSearchResultItem";
 
 function DemoSearchResults() {
+  const dispatch = useDispatch();
+
   const searchStatus = useSelector((state) => state.search.status);
   const jobs = useSelector(selectAllJobsByTermAndSortedAndFiltered);
 
-  const onDragEnd = (result) => {};
+  const onDragEnd = (result) => {
+    if (!result.destination) return;
+
+    const { source, destination } = result;
+
+    const reorderedJobs = Array.from(jobs);
+    const [removed] = reorderedJobs.splice(source.index, 1);
+    reorderedJobs.splice(destination.index, 0, removed);
+
+    dispatch(updateJobs(reorderedJobs));
+  };
 
   return (
     <div className="flex min-w-full flex-col overflow-x-auto rounded border border-gray-200 bg-white text-sm">
