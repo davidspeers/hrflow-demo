@@ -26,6 +26,29 @@ export const searchSlice = createSlice({
     },
     updateSortFilter: (state, action) => {
       state.sortFilter = action.payload;
+      const jobs = state.jobs;
+      const sortFilter = state.sortFilter;
+      switch (sortFilter) {
+        case SortFilter.CREATION_DATE:
+          state.jobs = jobs.sort((a, b) =>
+            b.creationDate.localeCompare(a.creationDate),
+          );
+          break;
+        case SortFilter.NAME:
+          state.jobs = jobs.sort((a, b) => a.name.localeCompare(b.name));
+          break;
+        case SortFilter.CATEGORY:
+          state.jobs = jobs.sort((a, b) => {
+            if (a.category === "N/A") return 1;
+            if (b.category === "N/A") return -1;
+            return a.category === "N/A"
+              ? 1
+              : b.category === "N/A"
+                ? -1
+                : a.category.localeCompare(b.category);
+          });
+          break;
+      }
     },
     addToCategoryFilters: (state, { payload }) => {
       if (!state.categoryFilters.includes(payload)) {
@@ -40,8 +63,11 @@ export const searchSlice = createSlice({
     resetCategoryFilters: (state) => {
       state.categoryFilters = [];
     },
-    updateJobs: (state, action) => {
-      state.jobs = action.payload;
+    updateJobPosition: (state, action) => {
+      const reorderedJobs = Array.from(state.jobs);
+      const [removed] = reorderedJobs.splice(action.payload.oldPosition, 1);
+      reorderedJobs.splice(action.payload.newPosition, 0, removed);
+      state.jobs = reorderedJobs;
     },
   },
   extraReducers(builder) {
@@ -66,7 +92,7 @@ export const {
   addToCategoryFilters,
   removeFromCategoryFilters,
   resetCategoryFilters,
-  updateJobs,
+  updateJobPosition,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;
@@ -87,36 +113,11 @@ const selectAllJobsByTerm = (state) => {
   });
 };
 
-const selectAllJobsByTermAndSorted = (state) => {
+export const selectAllJobsByTermAndFiltered = (state) => {
   const jobs = selectAllJobsByTerm(state);
-  const sortFilter = selectSortFilter(state);
-  switch (sortFilter) {
-    case SortFilter.CREATION_DATE:
-      return jobs.sort((a, b) => b.creationDate.localeCompare(a.creationDate));
-    case SortFilter.NAME:
-      return jobs.sort((a, b) => a.name.localeCompare(b.name));
-    case SortFilter.CATEGORY:
-      return jobs.sort((a, b) => {
-        if (a.category === "N/A") return 1;
-        if (b.category === "N/A") return -1;
-        return a.category === "N/A"
-          ? 1
-          : b.category === "N/A"
-            ? -1
-            : a.category.localeCompare(b.category);
-      });
-    default:
-      return jobs;
-  }
-};
-
-export const selectAllJobsByTermAndSortedAndFiltered = (state) => {
-  const jobs = selectAllJobsByTermAndSorted(state);
   const categoryFilters = selectCategoryFilters(state);
   if (categoryFilters.length === 0) return jobs;
   return jobs.filter((job) => {
-    console.log(job);
-    console.log(categoryFilters);
     return categoryFilters
       .map((filter) => filter.toLowerCase())
       .includes(job.category.toLowerCase());

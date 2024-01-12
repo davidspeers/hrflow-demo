@@ -1,6 +1,6 @@
 import {
-  selectAllJobsByTermAndSortedAndFiltered,
-  updateJobs,
+  selectAllJobsByTermAndFiltered,
+  updateJobPosition,
   updateSortFilter,
 } from "@stores/search/searchSlice";
 import RequestStatus from "@types/RequestStatus";
@@ -14,19 +14,20 @@ function DemoSearchResults() {
   const dispatch = useDispatch();
 
   const searchStatus = useSelector((state) => state.search.status);
-  const jobs = useSelector(selectAllJobsByTermAndSortedAndFiltered);
+  const jobs = useSelector(selectAllJobsByTermAndFiltered);
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
 
     const { source, destination } = result;
 
-    const reorderedJobs = Array.from(jobs);
-    const [removed] = reorderedJobs.splice(source.index, 1);
-    reorderedJobs.splice(destination.index, 0, removed);
-
     dispatch(updateSortFilter(SortFilter.CUSTOM));
-    dispatch(updateJobs(reorderedJobs));
+    dispatch(
+      updateJobPosition({
+        oldPosition: source.index,
+        newPosition: destination.index,
+      }),
+    );
   };
 
   return (
