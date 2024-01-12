@@ -1,14 +1,12 @@
 import { selectAllJobs } from "@stores/search/searchSlice";
+import RequestStatus from "@types/RequestStatus";
 import SortButtonStatus from "@types/sortButtonStatus";
 import { useSelector } from "react-redux";
-import { useDispatch, useSelector } from "react-redux";
 import DemoLoadingSearchResultItem from "./DemoLoadingSearchResultItem";
 import DemoSearchResultItem from "./DemoSearchResultItem";
 import DemoSearchResultsSortButton from "./DemoSearchResultsSortButton";
 
 function DemoSearchResults() {
-  const dispatch = useDispatch();
-
   const searchStatus = useSelector((state) => state.search.status);
   const jobs = useSelector(selectAllJobs);
 

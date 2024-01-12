@@ -1,18 +1,13 @@
-import { fetchJobResults, updateTerm } from "@stores/search/searchSlice";
-import Status from "@types/requestStatus";
+import { updateTerm } from "@stores/search/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function DemoSearchBar() {
-  const searchTerm = useSelector((state) => state.search.term);
   const dispatch = useDispatch();
 
-  const searchStatus = useSelector((state) => state.search.status);
+  const searchTerm = useSelector((state) => state.search.term);
 
   const handleChange = (event) => {
     dispatch(updateTerm(event.target.value));
-    if (searchStatus === Status.IDLE) {
-      dispatch(fetchJobResults());
-    }
   };
 
   return (

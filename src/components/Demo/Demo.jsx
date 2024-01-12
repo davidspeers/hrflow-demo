@@ -1,7 +1,21 @@
+import { fetchJobResults } from "@stores/search/searchSlice";
+import RequestStatus from "@types/RequestStatus";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DemoSearchBar from "./DemoSearchBar";
 import DemoSearchResults from "./DemoSearchResults";
 
 function Demo() {
+  const dispatch = useDispatch();
+
+  const searchStatus = useSelector((state) => state.search.status);
+
+  useEffect(() => {
+    if (searchStatus === RequestStatus.IDLE) {
+      dispatch(fetchJobResults());
+    }
+  }, [dispatch, searchStatus]);
+
   return (
     <div
       id="page-container"
@@ -12,7 +26,12 @@ function Demo() {
         className="flex max-w-full flex-auto flex-col overflow-hidden px-8 text-center xl:max-w-7xl"
       >
         <DemoSearchBar />
-        <DemoSearchResults />
+
+        {searchStatus === RequestStatus.FAILED ? (
+          <div>Something went wrong...</div>
+        ) : (
+          <DemoSearchResults />
+        )}
       </main>
     </div>
   );
