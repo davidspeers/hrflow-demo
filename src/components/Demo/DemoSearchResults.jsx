@@ -1,12 +1,12 @@
+import { selectAllJobsByTermAndSorted } from "@stores/search/searchSlice";
 import RequestStatus from "@types/RequestStatus";
 import { useSelector } from "react-redux";
-import { selectAllJobsByTerm } from "../../stores/search/searchSlice";
 import DemoLoadingSearchResultItem from "./DemoLoadingSearchResultItem";
 import DemoSearchResultItem from "./DemoSearchResultItem";
 
 function DemoSearchResults() {
   const searchStatus = useSelector((state) => state.search.status);
-  const jobs = useSelector(selectAllJobsByTerm);
+  const jobs = useSelector(selectAllJobsByTermAndSorted);
 
   return (
     <div className="min-w-full overflow-x-auto rounded border border-gray-200 bg-white">
