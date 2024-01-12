@@ -12,7 +12,7 @@ function DemoToolbarSearchBar() {
   };
 
   return (
-    <div className="relative m-2 w-full max-w-96 flex-grow">
+    <div className="relative my-2 w-full max-w-96 flex-grow">
       <div className="pointer-events-none absolute inset-y-0 left-0 my-px ml-px flex w-12 items-center justify-center rounded-l-lg text-gray-500">
         <SearchIcon />
       </div>

@@ -15,9 +15,9 @@ function DemoToolbar() {
   const isAnyCategoryFilterApplied = categoryFilters.length > 0;
 
   return (
-    <div className="mb-2 mt-2 flex flex-col flex-wrap items-start justify-between md:flex-row">
+    <div className="my-4 flex flex-col flex-wrap items-start justify-between md:flex-row">
       <DemoToolbarSearchBar />
-      <div className="m-2 flex flex-grow flex-col items-start">
+      <div className="my-2 flex flex-grow flex-col items-start">
         <div className="flex w-full min-w-48 items-end justify-start md:justify-center">
           <DemoToolbarCategoryFilterDropdown />
           {isAnyCategoryFilterApplied && (
